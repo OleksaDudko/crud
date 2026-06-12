@@ -5,6 +5,12 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+    flex-wrap: wrap;
+}
+
+.item{
+    padding: 20px;
+    
 }
 
 .img{
@@ -24,3 +30,32 @@
     margin: 0 auto;
 }
 
+.backdrop{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.68);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: auto;
+}
+
+.modal{
+    width: 500px;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+.form{
+    display: flex;
+    gap: 15px;
+
+}
+
+.box{
+    width: 1200px;
+    margin: 0 auto;
+}
