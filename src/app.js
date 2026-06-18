@@ -1,4 +1,7 @@
 import { getIce } from "./appi/getIce";
+import { addIceCream } from "./appi/addIceCream";
+import { delIce } from "./appi/delIce";
+
 
 
 const listEl = document.querySelector(".list");
@@ -18,6 +21,10 @@ function createIceMurcup(arr) {
             <p>${type}</p>
             <p>${description}</p>
             <p>${calories}</p>
+            <div class="wrap">
+            <button class="edit" type="button" data-action="edit">Edit</button>
+            <button class="delete" type="button" data-action="delete">Delete</button>
+            </div>
         </li>`
     }).join("")
 
@@ -29,12 +36,12 @@ btnOpenEl.addEventListener("click", openModal)
 
 function openModal() {
     backdropEl.style.display = "flex";
-    backdropEl.style.pointerevents = "auto";
+    backdropEl.style.pointerEvents = "auto";
 }
 
-function closeModal(params) {
+function closeModal() {
     backdropEl.style.display = "none";
-    backdropEl.style.pointerevents = "auto";
+    backdropEl.style.pointerEvents = "auto";
 }
 
 window.addEventListener("keydown", (e) => {
@@ -43,23 +50,40 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
-backdropEl.addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) {
-        closeModal()
-    }
-})
-
 formEl.addEventListener("submit", (e) => {
     e.preventDefault()
     const data = {
-        img: e.currenTarget.elements.link.value,
-        name: e.currenTarget.elements.name.value,
-        price: e.currenTarget.elements.price.value,
-        type: e.currenTarget.elements.type.value,
-        description: e.currenTarget.elements.desc.value,
-        calories: e.currenTarget.elements.calories.value
+        image: e.currentTarget.elements.link.value,
+        name: e.currentTarget.elements.name.value,
+        price: e.currentTarget.elements.price.value,
+        type: e.currentTarget.elements.type.value,
+        description: e.currentTarget.elements.desc.value,
+        calories: e.currentTarget.elements.calories.value
     }
 
-    formEl.reset();
-    closeModal()
+    addIceCream(data)
+    .then(getIce)
+    .then(res => createIceMurcup(res))
+    .finally(() => {
+        formEl.reset();
+        closeModal();
+    });
+})
+
+listEl.addEventListener("click", (e) => {
+    if (e.target.nodeName !== "BUTTON") {
+        return
+    }
+
+    const action = e.target.dataset.action
+    const li = e.target.closest("li");
+    const id = li.id;
+    if (action === "delete") {
+        delIce(id)
+        .then(getIce)
+        .then(res => createIceMurcup(res))
+    }
+    if (action === "edit") {
+        openModal()
+    }
 })

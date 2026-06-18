@@ -6,7 +6,7 @@ export function addIceCream(data) {
       "Content-Type": "application/json; charset=UTF-8",
     },
   };
-  return fetch("http://localhost:3000/iceCreams",options).then((res) => res.json());
+  return fetch("http://localhost:3001/iceCreams",options).then((res) => res.json());
 }
 
 // export function getIce (){
