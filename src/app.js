@@ -9,7 +9,13 @@ const btnOpenEl = document.querySelector(".btn");
 const backdropEl = document.querySelector(".backdrop");
 const formEl = document.querySelector(".form")
 
-getIce().then(res => createIceMurcup(res));
+
+async function init() {
+    const res = await getIce();
+    await createIceMurcup(res)
+}
+
+init()
 
 
 function createIceMurcup(arr) {
@@ -50,7 +56,7 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
-formEl.addEventListener("submit", (e) => {
+formEl.addEventListener("submit", async (e) => {
     e.preventDefault()
     const data = {
         image: e.currentTarget.elements.link.value,
@@ -61,16 +67,14 @@ formEl.addEventListener("submit", (e) => {
         calories: e.currentTarget.elements.calories.value
     }
 
-    addIceCream(data)
-    .then(getIce)
-    .then(res => createIceMurcup(res))
-    .finally(() => {
-        formEl.reset();
-        closeModal();
-    });
+    await addIceCream(data)
+    const res = await getIce
+    createIceMurcup(res)
+    formEl.reset();
+    closeModal();
 })
 
-listEl.addEventListener("click", (e) => {
+listEl.addEventListener("click", async (e) => {
     if (e.target.nodeName !== "BUTTON") {
         return
     }
@@ -79,9 +83,9 @@ listEl.addEventListener("click", (e) => {
     const li = e.target.closest("li");
     const id = li.id;
     if (action === "delete") {
-        delIce(id)
-        .then(getIce)
-        .then(res => createIceMurcup(res))
+        await delIce(id)
+        const res = await getIce()
+        createIceMurcup(res)
     }
     if (action === "edit") {
         openModal()

@@ -37,15 +37,6 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScnzivNBL34_W3gZSTVybVxviRnisJv_QTYQ&s"
     },
     {
-      "id": "8",
-      "name": "Чорниця-йогурт",
-      "type": "йогуртове",
-      "calories": 180,
-      "price": 39,
-      "description": "Натуральний йогурт з чорничним пюре та легкою кислинкою.",
-      "image": "https://images.unian.net/photos/2017_01/thumb_files/800_0_1483703699-6646.jpg"
-    },
-    {
       "id": "9",
       "name": "Бананове",
       "type": "фруктове",
@@ -62,6 +53,16 @@
       "price": 43,
       "description": "Морозиво на основі кокосового молока з ароматом тропіків.",
       "image": "https://lifestyle-ua.com/wp-content/uploads/2023/05/morozyvo-z-dostupnyh-produktiv9.webp"
+    },
+    {
+      "image": "da",
+      "name": "da",
+      "price": "da",
+      "type": "da",
+      "description": "da",
+      "calories": "da",
+      "id": "b7pX_o6Pl1Y"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
